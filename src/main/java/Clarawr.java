@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Clarawr {
     static int pointer = 0;
-    static Task[] tasks = new Task[100]; //Array to store Task objects
+    static Task[] tasks = new Task[100];
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -14,43 +14,59 @@ public class Clarawr {
 
         while (!instruction.equalsIgnoreCase("bye")) {
             if (instruction.equalsIgnoreCase("list")) {
-                // Print the instructions in the array
                 if (pointer == 0) {
-                    System.out.println("No instructions added yet.");
+                    System.out.println("No tasks in your list.");
                 } else {
-                    System.out.println("Here are the tasks in your list: ");
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < pointer; i++) {
-                        System.out.println((i + 1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].description);
+                        System.out.println((i + 1) + "." + tasks[i]);
                     }
                 }
-            } else if (instruction.split(" ")[0].equals("mark")) {
-                int selecter = Integer.parseInt(instruction.split(" ")[1]) - 1;
-                if (selecter >= 0 && selecter < pointer) {
-                    tasks[selecter].isDone = true;
-                    System.out.println("Nice! I've marked this task as done: \n"
-                            + "[" + tasks[selecter].getStatusIcon() + "] " + tasks[selecter].description);
+            } else if (instruction.startsWith("todo ")) {
+                String description = instruction.substring(5);
+                tasks[pointer] = new Todo(description);
+                pointer++;
+                System.out.println("Got it, I've added this task: ");
+                System.out.println("  " + tasks[pointer - 1]);
+                System.out.println("Now you have " + pointer + " tasks in the list.");
+            } else if (instruction.startsWith("deadline ")) {
+                String[] parts = instruction.substring(9).split(" /by ");
+                tasks[pointer] = new Deadline(parts[0], parts[1]);
+                pointer++;
+                System.out.println("Got it, I've added this task: ");
+                System.out.println("  " + tasks[pointer - 1]);
+                System.out.println("Now you have " + pointer + " tasks in the list.");
+            } else if (instruction.startsWith("event ")) {
+                String[] parts = instruction.substring(6).split(" /from ");
+                String[] times = parts[1].split(" /to ");
+                tasks[pointer] = new Event(parts[0], times[0], times[1]);
+                pointer++;
+                System.out.println("Got it, I've added this task: ");
+                System.out.println("  " + tasks[pointer - 1]);
+                System.out.println("Now you have " + pointer + " tasks in the list.");
+            } else if (instruction.startsWith("mark ")) {
+                int index = Integer.parseInt(instruction.split(" ")[1]) - 1;
+                if (index >= 0 && index < pointer) {
+                    tasks[index].markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("  " + tasks[index]);
                 } else {
-                    System.out.println("Task does not exist! Please try again.");
+                    System.out.println("Invalid task number! Please try again.");
                 }
-
-            } else if (instruction.split(" ")[0].equals("unmark")) {
-                int selecter = Integer.parseInt(instruction.split(" ")[1]) - 1;
-                if (selecter >= 0 && selecter < pointer) {
-                    tasks[selecter].isDone = false;
-                    System.out.println("OK, I've marked this task as not done yet: \n"
-                            + "[" + tasks[selecter].getStatusIcon() + "] " + tasks[selecter].description);
+            } else if (instruction.startsWith("unmark ")) {
+                int index = Integer.parseInt(instruction.split(" ")[1]) - 1;
+                if (index >= 0 && index < pointer) {
+                    tasks[index].markUndone();
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println("  " + tasks[index]);
                 } else {
-                    System.out.println("Task does not exist! Please try again.");
+                    System.out.println("Invalid task number! Please try again.");
                 }
-            } else {
-                System.out.println("added: " + instruction); // Repeat the input
-                tasks[pointer] = new Task(instruction); // Add the instruction to the array
-                pointer++; // Move the pointer to the next index
             }
-
-            instruction = scanner.nextLine(); // Read the next input
+            instruction = scanner.nextLine();
         }
+
         System.out.println("Bye. Hope to see you again soon!");
-        scanner.close(); // Close the scanner
+        scanner.close();
     }
 }

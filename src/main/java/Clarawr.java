@@ -18,7 +18,6 @@ public class Clarawr {
                 if (pointer == 0) {
                     System.out.println("No instructions added yet.");
                 } else {
-                    System.out.println("Instructions list:");
                     for (int i = 0; i < pointer; i++) {
                         System.out.println((i + 1) + ". " + instructions[i]);
                     }

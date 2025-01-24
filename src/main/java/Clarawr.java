@@ -63,6 +63,9 @@ public class Clarawr {
                     System.out.println("Invalid task number! Please try again.");
                 }
             }
+            else {
+                System.out.println("Sorry I do not understand your instruction :(");
+            }
             instruction = scanner.nextLine();
         }
 

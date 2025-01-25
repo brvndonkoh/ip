@@ -1,7 +1,50 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Clarawr
+What can I do for you?
+Got it, I've added this task:
+    [T][ ] revise CS2106
+Now you have 1 tasks in the list.
+Got it, I've added this task:
+    [D][ ] CS2103 (by: Fri 4pm)
+Now you have 2 tasks in the list.
+Got it, I've added this task:
+    [E][ ] internship interview (from: Mon 4pm to: Mon 5pm)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1.  [T][ ] revise CS2106
+2.  [D][ ] CS2103 (by: Fri 4pm)
+3.  [E][ ] internship interview (from: Mon 4pm to: Mon 5pm)
+Got it, I've added this task:
+    [T][ ] dinner with parents
+Now you have 4 tasks in the list.
+Here are the tasks in your list:
+1.  [T][ ] revise CS2106
+2.  [D][ ] CS2103 (by: Fri 4pm)
+3.  [E][ ] internship interview (from: Mon 4pm to: Mon 5pm)
+4.  [T][ ] dinner with parents
+Nice! I've marked this task as done:
+    [T][X] dinner with parents
+Nice! I've marked this task as done:
+    [E][X] internship interview (from: Mon 4pm to: Mon 5pm)
+Here are the tasks in your list:
+1.  [T][ ] revise CS2106
+2.  [D][ ] CS2103 (by: Fri 4pm)
+3.  [E][X] internship interview (from: Mon 4pm to: Mon 5pm)
+4.  [T][X] dinner with parents
+Invalid task number! Please try again.
+Nice! I've marked this task as done:
+    [T][X] revise CS2106
+Nice! I've marked this task as done:
+    [D][X] CS2103 (by: Fri 4pm)
+Here are the tasks in your list:
+1.  [T][X] revise CS2106
+2.  [D][X] CS2103 (by: Fri 4pm)
+3.  [E][X] internship interview (from: Mon 4pm to: Mon 5pm)
+4.  [T][X] dinner with parents
+OK, I've marked this task as not done yet:
+    [D][ ] CS2103 (by: Fri 4pm)
+Here are the tasks in your list:
+1.  [T][X] revise CS2106
+2.  [D][ ] CS2103 (by: Fri 4pm)
+3.  [E][X] internship interview (from: Mon 4pm to: Mon 5pm)
+4.  [T][X] dinner with parents
+Bye. Hope to see you again soon!

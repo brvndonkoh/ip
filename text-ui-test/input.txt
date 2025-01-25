@@ -1,0 +1,16 @@
+todo revise CS2106
+deadline CS2103 /by Fri 4pm
+event internship interview /from Mon 4pm /to Mon 5pm
+list
+todo dinner with parents
+list
+mark 4
+mark 3
+list
+mark 5
+mark 1
+mark 2
+list
+unmark 2
+list
+bye

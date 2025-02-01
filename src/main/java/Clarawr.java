@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+enum TaskType {
+    TODO, DEADLINE, EVENT
+}
+
 public class Clarawr {
     static ArrayList<Task> tasks = new ArrayList<>();
 

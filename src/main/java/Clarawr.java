@@ -127,11 +127,20 @@ public class Clarawr {
                     LocalDate filterDate = LocalDate.parse(parts[1]);
 
                     System.out.println("Tasks on " + filterDate + ":");
+                    boolean found = false;
                     for (Task task : tasks) {
                         if (task instanceof Deadline) {
                             Deadline deadline = (Deadline) task;
                             if (deadline.getDeadline().toLocalDate().equals(filterDate)) {
                                 System.out.println(task);
+                                found = true;
+                            }
+                        } else if (task instanceof Event) {
+                            Event event = (Event) task;
+                            if (event.getFrom().toLocalDate().equals(filterDate) &&
+                            event.getTo().toLocalDate().equals(filterDate)) {
+                                System.out.println(task);
+                                found = true;
                             }
                         }
                     }

@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ public class Clarawr {
     static ArrayList<Task> tasks = new ArrayList<>();
     private static final String DIRECTORY_PATH = "./data";
     private static final String FILE_PATH = "./data/clarawr.txt";
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -57,7 +61,11 @@ public class Clarawr {
                     if (parts.length < 2 || parts[0].isEmpty() || parts[1].isEmpty()) {
                         throw new ClarawrException("The description and deadline of a task cannot be empty.");
                     }
-                    tasks.add(new Deadline(parts[0], parts[1]));
+                    String dateTimeString = parts[1].trim();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                    LocalDateTime deadlineDateTime = LocalDateTime.parse(dateTimeString, formatter);
+
+                    tasks.add(new Deadline(parts[0], deadlineDateTime));
                     System.out.println("Got it, I've added this task: ");
                     System.out.println("  " + tasks.get(tasks.size() - 1));
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -71,7 +79,11 @@ public class Clarawr {
                     if (times.length < 2 || parts[0].isEmpty() || times[0].isEmpty() || times[1].isEmpty()) {
                         throw new ClarawrException("The description and both event times cannot be empty.");
                     }
-                    tasks.add(new Event(parts[0], times[0], times[1]));
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                    LocalDateTime fromTime = LocalDateTime.parse(times[0].trim(), formatter);
+                    LocalDateTime toTime = LocalDateTime.parse(times[1].trim(), formatter);
+
+                    tasks.add(new Event(parts[0].trim(), fromTime, toTime));
                     System.out.println("Got it, I've added this task: ");
                     System.out.println("  " + tasks.get(tasks.size() - 1));
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -107,6 +119,23 @@ public class Clarawr {
                     } else {
                         System.out.println("Invalid task number! Please try again.");
                     }
+                } else if (instruction.startsWith("listByDate")) {
+                    String[] parts = instruction.split(" ");
+                    if (parts.length < 2) {
+                        throw new ClarawrException("Please provide a date in the format yyyy-MM-dd.");
+                    }
+                    LocalDate filterDate = LocalDate.parse(parts[1]);
+
+                    System.out.println("Tasks on " + filterDate + ":");
+                    for (Task task : tasks) {
+                        if (task instanceof Deadline) {
+                            Deadline deadline = (Deadline) task;
+                            if (deadline.getDeadline().toLocalDate().equals(filterDate)) {
+                                System.out.println(task);
+                            }
+                        }
+                    }
+
                 } else {
                     System.out.println("Sorry I do not understand your instruction :(");
                 }
@@ -148,11 +177,17 @@ public class Clarawr {
                             tasks.add(new Todo(line.substring(4)));
                         } else if (line.startsWith("[D]")) {
                             String[] parts = line.substring(4).split(" /by ");
-                            tasks.add(new Deadline(parts[0], parts[1]));
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
+                            LocalDateTime deadlineDateTime = LocalDateTime.parse(parts[1].trim(), formatter);
+                            tasks.add(new Deadline(parts[0], deadlineDateTime));
                         } else if (line.startsWith("[E]")) {
                             String[] parts = line.substring(4).split(" /from ");
                             String[] times = parts[1].split(" /to ");
-                            tasks.add(new Event(parts[0], times[0], times[1]));
+
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
+                            LocalDateTime from = LocalDateTime.parse(times[0].trim(), formatter);
+                            LocalDateTime to = LocalDateTime.parse(times[1].trim(), formatter);
+                            tasks.add(new Event(parts[0], from, to));
                         }
                     } catch (Exception e) {
                         System.out.println("Warning: Corrupt task data detected. Skipping line.");

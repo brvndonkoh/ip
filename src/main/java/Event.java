@@ -6,10 +6,11 @@ public class Event extends Task {
     protected LocalDateTime to;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
 
-    public Event(String description, LocalDateTime from, LocalDateTime to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to, boolean isDone) {
         super(description, TaskType.EVENT);
         this.from = from;
         this.to = to;
+        this.isDone = isDone;
     }
 
     public LocalDateTime getFrom() {

@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+enum TaskType {
+    TODO, DEADLINE, EVENT
+}
+
 public class Clarawr {
     private static final Ui ui = new Ui();
     private static final Storage storage = new Storage();

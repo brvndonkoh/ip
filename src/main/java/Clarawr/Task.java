@@ -29,4 +29,12 @@ abstract class Task {
     public String toFileString() {
         return (isDone ? "X" : " ") + description;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
 }

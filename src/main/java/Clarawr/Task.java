@@ -18,6 +18,7 @@ abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
     public void markUndone() {
         this.isDone = false;
     }

@@ -1,11 +1,9 @@
+package Clarawr;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
-enum TaskType {
-    TODO, DEADLINE, EVENT
-}
 
 public class Clarawr {
     private static final Ui ui = new Ui();

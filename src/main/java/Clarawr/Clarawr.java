@@ -3,6 +3,7 @@ package Clarawr;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 
 enum TaskType {
@@ -76,8 +77,28 @@ public class Clarawr {
                 listTasksByDate(commandParts[1]);
                 break;
 
+            case "find":
+                findTasksByKeyword(commandParts[1]);
+                break;
+
             default:
                 ui.showErrorMessage("Sorry, I do not understand your instruction :(");
+        }
+    }
+
+    private static void findTasksByKeyword(String keyword) {
+        ui.showMessage("Here are the matching tasks:");
+
+        boolean found = false;
+        for (Task task : taskList.getAllTasks()) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                ui.showMessage(task.toString());
+                found = true;
+            }
+        }
+
+        if (!found) {
+            ui.showMessage("No matching tasks found.");
         }
     }
 

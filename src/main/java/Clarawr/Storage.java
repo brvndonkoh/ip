@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
-    private static final String FILE_PATH = "./data/clarawr.txt";
+    private static final String FILE_PATH = "C:\\Users\\user\\CS2103_IP\\ip\\src\\data\\clarawr.txt";
 
     public static void saveTasksToFile(ArrayList<Task> tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {

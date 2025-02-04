@@ -96,8 +96,34 @@ public class Clarawr {
 			listTasksByDate(commandParts[1]);
 			break;
 
+		case "find":
+			findTasksByKeyword(commandParts[1]);
+			break;
+
 		default:
 			ui.showErrorMessage("Sorry, I do not understand your instruction :(");
+		}
+	}
+
+	/**
+	 * Searches for tasks in the task list that contain the specified keyword in their description.
+	 * Displays all matching tasks or a message if no matches are found.
+	 *
+	 * @param keyword The keyword to search for in task descriptions. Case-insensitive.
+	 */
+	private static void findTasksByKeyword(String keyword) {
+		ui.showMessage("Here are the matching tasks:");
+
+		boolean found = false;
+		for (Task task : taskList.getAllTasks()) {
+			if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+				ui.showMessage(task.toString());
+				found = true;
+			}
+		}
+
+		if (!found) {
+			ui.showMessage("No matching tasks found.");
 		}
 	}
 

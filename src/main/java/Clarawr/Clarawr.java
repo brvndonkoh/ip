@@ -3,6 +3,7 @@ package Clarawr;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 
 enum TaskType {
@@ -61,44 +62,44 @@ public class Clarawr {
         String[] commandParts = parser.parseCommand(instruction);
         String command = commandParts[0].toLowerCase();
 
-        switch (command) {
-            case "list":
-                ui.showListOfTasks(taskList.getAllTasks());
-                break;
+		switch (command) {
+		case "list":
+			ui.showListOfTasks(taskList.getAllTasks());
+			break;
 
-            case "todo":
-                addTodoTask(commandParts[1]);
-                break;
+		case "todo":
+			addTodoTask(commandParts[1]);
+			break;
 
-            case "deadline":
-                addDeadlineTask(commandParts[1]);
-                break;
+		case "deadline":
+			addDeadlineTask(commandParts[1]);
+			break;
 
-            case "event":
-                addEventTask(commandParts[1]);
-                break;
+		case "event":
+			addEventTask(commandParts[1]);
+			break;
 
-            case "mark":
-                markTaskDone(commandParts[1]);
-                break;
+		case "mark":
+			markTaskDone(commandParts[1]);
+			break;
 
-            case "unmark":
-                markTaskUndone(commandParts[1]);
-                break;
+		case "unmark":
+			markTaskUndone(commandParts[1]);
+			break;
 
-            case "delete":
-            case "remove":
-                deleteTask(commandParts[1]);
-                break;
+		case "delete":
+		case "remove":
+			deleteTask(commandParts[1]);
+			break;
 
-            case "listbydate":
-                listTasksByDate(commandParts[1]);
-                break;
+		case "listbydate":
+			listTasksByDate(commandParts[1]);
+			break;
 
-            default:
-                ui.showErrorMessage("Sorry, I do not understand your instruction :(");
-        }
-    }
+		default:
+			ui.showErrorMessage("Sorry, I do not understand your instruction :(");
+		}
+	}
 
     /**
      * Adds a new Todo task to the task list.

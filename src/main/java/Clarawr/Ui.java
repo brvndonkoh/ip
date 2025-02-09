@@ -16,36 +16,25 @@ public class Ui {
     }
 
     /**
-     * Displays a goodbye message to the user.
-     */
-    public void showGoodbyeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    /**
      * Displays the list of tasks to the user.
      * If the task list is empty, a message indicating so is displayed.
      *
      * @param tasks The list of tasks to display.
+     * @return A formatted string representation of the tasks in the list,
+     *         or a message indicating that no tasks are available.
      */
-    public void showListOfTasks(ArrayList<Task> tasks) {
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks in your list.");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + "." + tasks.get(i));
-            }
-        }
-    }
+    public String showListOfTasks(ArrayList<Task> tasks) {
 
-    /**
-     * Displays a custom message to the user.
-     *
-     * @param message The message to display.
-     */
-    public void showMessage(String message) {
-        System.out.println(message);
+        if (tasks.isEmpty()) {
+            return "No tasks in your list.";
+        }
+
+        StringBuilder response = new StringBuilder("Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            response.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        }
+
+        return response.toString().trim();
     }
 
     /**

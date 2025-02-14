@@ -1,10 +1,6 @@
 package Clarawr;
 
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 import java.util.ArrayList;
 
@@ -14,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     private static final String FILE_PATH = "C:\\Users\\user\\CS2103_IP\\ip\\src\\data\\clarawr.txt";
+    ;
 
     /**
      * Saves a list of tasks to a file.
@@ -22,10 +19,16 @@ public class Storage {
      * @param tasks The list of tasks to save to the file.
      */
     public static void saveTasksToFile(ArrayList<Task> tasks) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (Task task : tasks) {
-                writer.write(task.toFileString());
-                writer.newLine();
+        try {
+            File file = new File(FILE_PATH);
+            file.getParentFile().mkdirs();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+                for (Task task : tasks) {
+                    writer.write(task.toFileString());
+                    writer.newLine();
+                }
+                writer.flush();
             }
         } catch (IOException e) {
             System.out.println("Error saving tasks to file.");

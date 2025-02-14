@@ -38,7 +38,7 @@ test {
 }
 
 application {
-    mainClass.set("Launcher")
+    mainClass.set("Clarawr.Launcher")
 }
 
 shadowJar {

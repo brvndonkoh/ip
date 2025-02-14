@@ -62,7 +62,8 @@ abstract class Task {
      * @return A string representing the task, formatted for file storage.
      */
     public String toFileString() {
-        return (isDone ? "X" : " ") + description;
+
+        return "[" + getStatusIcon() + "]" + description;
     }
 
     /**
@@ -81,5 +82,9 @@ abstract class Task {
      */
     public boolean isDone() {
         return isDone;
+    }
+
+    public TaskType getTaskType() {
+        return this.type;
     }
 }

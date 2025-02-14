@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import java.util.List;
+
 import java.util.Scanner;
 
 enum TaskType {
@@ -24,32 +26,11 @@ public class Clarawr {
 	private static final TaskList taskList = new TaskList();
 
 	/**
-	 * The main entry point of the Clarawr application.
-	 * This method initializes the application, loads tasks from a file,
-	 * processes user commands, and saves tasks back to the file upon exiting.
-	 *
-	 * @param args Command line arguments (unused in this implementation).
+	 * Constructs the Clarawr task management application.
+	 * Loads tasks from saved ile during initialisation.
 	 */
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-
+	public Clarawr() {
 		taskList.addAll(storage.loadTasksFromFile());
-
-		ui.showWelcomeMessage();
-
-		String instruction = scanner.nextLine();
-
-		while (!instruction.equalsIgnoreCase("bye")) {
-			try {
-				handleCommand(instruction);
-			} catch (ClarawrException e) {
-				ui.showErrorMessage(e.getMessage());
-			}
-			instruction = scanner.nextLine();
-		}
-
-		storage.saveTasksToFile(taskList.getAllTasks());
-		scanner.close();
 	}
 
 	/**
@@ -94,7 +75,7 @@ public class Clarawr {
 			return findTasksByKeyword(commandParts[1]);
 
 		case "bye":
-			storage.saveTasksToFile(taskList.getAllTasks());
+			Storage.saveTasksToFile(taskList.getAllTasks());
 			Platform.exit();
 
 		default:

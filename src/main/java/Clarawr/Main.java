@@ -24,11 +24,15 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage stage) {
+
+		assert clarawr != null : "Clarawr instance should not be null";
 		try {
 			stage.setMinHeight(220);
 			stage.setMinWidth(417);
 
 			FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+			assert fxmlLoader.getLocation() != null : "FXML file could not be loaded from /view/MainWindow.fxml";
+
 			AnchorPane ap = fxmlLoader.load();
 			Scene scene = new Scene(ap);
 

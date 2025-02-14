@@ -3,17 +3,10 @@ package Clarawr;
 import java.util.ArrayList;
 
 /**
- * Provides methods for displaying messages to the user, including
- * welcome, goodbye, task list, and error messages.
+ * Provides a method for displaying messages to the user, including
+ * task list.
  */
 public class Ui {
-
-    /**
-     * Displays a welcome message to the user.
-     */
-    public void showWelcomeMessage() {
-        System.out.println("Hello! I'm Clarawr.Clarawr\nWhat can I do for you?");
-    }
 
     /**
      * Displays the list of tasks to the user.
@@ -25,6 +18,8 @@ public class Ui {
      */
     public String showListOfTasks(ArrayList<Task> tasks) {
 
+        assert tasks != null : "Task list cannot be null";
+
         if (tasks.isEmpty()) {
             return "No tasks in your list.";
         }
@@ -35,14 +30,5 @@ public class Ui {
         }
 
         return response.toString().trim();
-    }
-
-    /**
-     * Displays an error message to the user.
-     *
-     * @param errorMessage The error message to display.
-     */
-    public void showErrorMessage(String errorMessage) {
-        System.out.println(errorMessage);
     }
 }

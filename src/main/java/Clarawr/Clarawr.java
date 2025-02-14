@@ -6,10 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import java.util.List;
-
-import java.util.Scanner;
-
 enum TaskType {
     TODO, DEADLINE, EVENT
 }
@@ -116,8 +112,9 @@ public class Clarawr {
 	 * @throws ClarawrException If the description is empty.
 	 */
 	private static String addTodoTask(String description) throws ClarawrException {
+		assert description != null : "Description cannot be null";
 		if (description.isEmpty()) {
-			throw new ClarawrException("The description of a todo task cannot be empty.");
+			throw new ClarawrException("Please add a description, I don't know what you are talking about :(");
 		}
 		Task task = new Todo(description, false);
 		taskList.addTask(task);
@@ -132,9 +129,14 @@ public class Clarawr {
 	 * @throws ClarawrException If the description or deadline is missing or malformed.
 	 */
 	private static String addDeadlineTask(String details) throws ClarawrException {
+		assert details != null : "Details cannot be null";
+
 		String[] parts = details.split(" /by ");
+
+		assert parts.length == 2 : "The details should contain both a description and deadline separated by ' /by '";
+
 		if (parts.length < 2) {
-			throw new ClarawrException("The description and deadline of a task cannot be empty.");
+			throw new ClarawrException("Tell me the description and deadline please.");
 		}
 
 		LocalDateTime deadline = parser.parseDeadlineTime(parts[1]);
@@ -151,12 +153,20 @@ public class Clarawr {
 	 * @throws ClarawrException If the description or timing information is missing or malformed.
 	 */
 	private static String addEventTask(String details) throws ClarawrException {
+		assert details != null : "Details cannot be null";
 		String[] parts = details.split(" /from ");
+
+		assert parts.length == 2 : "The event details should contain both a " +
+				"description and a start time separated by ' /from '";
+
 		if (parts.length < 2) {
 			throw new ClarawrException("The description and timing of an event cannot be empty.");
 		}
 
 		String[] times = parts[1].split(" /to ");
+
+		assert times.length == 2 : "The event should contain both a start time and an end time separated by ' /to '";
+
 		if (times.length < 2) {
 			throw new ClarawrException("The description and both event times cannot be empty.");
 		}
@@ -164,6 +174,8 @@ public class Clarawr {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 		LocalDateTime from = LocalDateTime.parse(times[0].trim(), formatter);
 		LocalDateTime to = LocalDateTime.parse(times[1].trim(), formatter);
+
+		assert from.isBefore(to) : "The start time must be before the end time.";
 
 		Task task = new Event(parts[0], from, to, false);
 		taskList.addTask(task);
@@ -178,7 +190,11 @@ public class Clarawr {
 	 * @throws ClarawrException If the index is invalid or out of range.
 	 */
 	private static String markTaskDone(String indexStr) throws ClarawrException {
+		assert indexStr != null : "Index string cannot be null";
+
 		int index = Integer.parseInt(indexStr) - 1;
+		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
+
 		taskList.markTaskAsDone(index);
 		return "Nice! I've marked this task as done.";
 	}
@@ -191,7 +207,11 @@ public class Clarawr {
 	 * @throws ClarawrException If the index is invalid or out of range.
 	 */
 	private static String markTaskUndone(String indexStr) throws ClarawrException {
+		assert indexStr != null : "Index string cannot be null";
+
 		int index = Integer.parseInt(indexStr) - 1;
+		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
+
 		taskList.markTaskAsUndone(index);
 		return "OK, I've marked this task as not done yet.";
 	}
@@ -204,10 +224,15 @@ public class Clarawr {
 	 * @throws ClarawrException If the index is invalid or out of range.
 	 */
 	private static String deleteTask(String indexStr) throws ClarawrException {
+		assert indexStr != null : "Index string cannot be null";
+
 		int index = Integer.parseInt(indexStr) - 1;
+
+		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
+
 		Task taskToDelete = taskList.getTask(index);
 		taskList.deleteTask(index);
-		return "Noted. I've removed this task: " + taskToDelete;
+		return "*BURP* I've eaten this task hehe: " + taskToDelete;
 	}
 
 	/**
@@ -218,6 +243,8 @@ public class Clarawr {
 	 * @throws ClarawrException If the date format is invalid.
 	 */
 	private static String listTasksByDate(String dateStr) throws ClarawrException {
+		assert dateStr != null : "Date string cannot be null";
+
 		LocalDate filterDate = LocalDate.parse(dateStr);
 		StringBuilder result = new StringBuilder("Tasks on " + filterDate + ":\n");
 

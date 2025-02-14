@@ -19,12 +19,19 @@ public class Storage {
      * @param tasks The list of tasks to save to the file.
      */
     public static void saveTasksToFile(ArrayList<Task> tasks) {
+
+        assert tasks != null : "Tasks list cannot be null";
+
         try {
             File file = new File(FILE_PATH);
             file.getParentFile().mkdirs();
 
+            assert file.exists() || file.createNewFile() : "File path is not valid or file could not be created.";
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
                 for (Task task : tasks) {
+
+                    assert task.toFileString() != null && !task.toFileString().isEmpty() : "Task cannot be saved in an invalid format";
                     writer.write(task.toFileString());
                     writer.newLine();
                 }
@@ -47,6 +54,9 @@ public class Storage {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
+
+                assert line != null && !line.trim().isEmpty() : "Task data line is null or empty";
+
                 try {
                     tasks.add(Parser.parseTask(line));
                 } catch (Exception e) {

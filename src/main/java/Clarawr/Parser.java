@@ -18,23 +18,27 @@ public class Parser {
      * @throws Exception If the task data is in an invalid format.
      */
     public static Task parseTask(String taskData) throws Exception {
-        //boolean isDone = false;
-        /*if (taskData.charAt(4) == 'X') {
-            isDone = true;
-            taskData = taskData.substring(0, 3) + taskData.substring(7); // Remove the [X] from the string
-        }*/
+
+        assert taskData != null && !taskData.isEmpty() : "Task data cannot be null or empty";
+
         boolean isDone = taskData.charAt(4) == 'X';
 
         if (taskData.startsWith("[T]")) {
             return new Todo(taskData.substring(6), isDone);
         } else if (taskData.startsWith("[D]")) {
             String[] parts = taskData.substring(6).split(" /by ");
+            assert parts.length == 2 : "Deadline task format is invalid, expected two parts separated by '/by'";
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
             LocalDateTime deadlineDateTime = LocalDateTime.parse(parts[1].trim(), formatter);
             return new Deadline(parts[0], deadlineDateTime, isDone);
         } else if (taskData.startsWith("[E]")) {
             String[] parts = taskData.substring(6).split(" /from ");
+            assert parts.length == 2 : "Event task format is invalid, expected '/from' separator";
+
             String[] times = parts[1].split(" /to ");
+            assert times.length == 2 : "Event time format is invalid, expected '/to' separator";
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
             LocalDateTime from = LocalDateTime.parse(times[0].trim(), formatter);
             LocalDateTime to = LocalDateTime.parse(times[1].trim(), formatter);
@@ -52,6 +56,9 @@ public class Parser {
      * @return An array of strings where the first element is the command and the second is the argument.
      */
     public static String[] parseCommand(String input) {
+
+        assert input != null && !input.isEmpty() : "Input command cannot be null or empty";
+
         return input.split(" ", 2);
     }
 
@@ -63,6 +70,9 @@ public class Parser {
      * @return The corresponding LocalDateTime object.
      */
     public static LocalDateTime parseDeadlineTime(String dateTimeString) {
+
+        assert dateTimeString != null && !dateTimeString.isEmpty() : "Deadline string cannot be null or empty";
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         return LocalDateTime.parse(dateTimeString, formatter);
     }

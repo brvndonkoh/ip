@@ -34,6 +34,11 @@ public class MainWindow extends AnchorPane {
 	 */
 	@FXML
 	public void initialize() {
+		assert scrollPane != null : "ScrollPane is not initialized";
+		assert dialogContainer != null : "DialogContainer is not initialized";
+		assert userInput != null : "UserInput is not initialized";
+		assert sendButton != null : "SendButton is not initialized";
+
 		scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 	}
 
@@ -43,6 +48,8 @@ public class MainWindow extends AnchorPane {
 	 * @param c The Clarawr instance that handles user input and generates responses.
 	 */
 	public void setClarawr(Clarawr c) {
+
+		assert c != null : "Clarawr instance is not initialized";
 		clarawr = c;
 	}
 
@@ -54,8 +61,13 @@ public class MainWindow extends AnchorPane {
 	 */
 	@FXML
 	private void handleUserInput() {
+
+		assert clarawr != null : "Clarawr instance is not initialized";
+
 		String input = userInput.getText();
 		String response = clarawr.getResponse(input);
+		assert response != null && !response.isEmpty() : "Clarawr's response is null or empty";
+
 		dialogContainer.getChildren().addAll(
 				DialogBox.getUserDialog(input, userImage),
 				DialogBox.getClarawrDialog(response, dukeImage)

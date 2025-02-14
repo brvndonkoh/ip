@@ -31,6 +31,10 @@ public class DialogBox extends HBox {
 	 * @param img  The image representing the speaker.
 	 */
 	private DialogBox(String text, Image img) {
+
+		assert text != null && !text.isEmpty() : "Text cannot be null or empty";
+		assert img != null : "Image cannot be null";
+
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
 			fxmlLoader.setController(this);

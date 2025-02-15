@@ -23,6 +23,9 @@ public class TaskList {
      * @param task The task to add.
      */
     public void addTask(Task task) {
+
+        assert task != null : "Task cannot be null";
+
         tasks.add(task);
         Storage.saveTasksToFile(tasks);
     }
@@ -34,6 +37,9 @@ public class TaskList {
      * @param index The index of the task to mark as done.
      */
     public void markTaskAsDone(int index) {
+
+        assert index >= 0 && index < tasks.size() : "Index out of range";
+
         Task task = tasks.get(index);
         task.markAsDone();
         Storage.saveTasksToFile(tasks);  // Save tasks immediately after modification
@@ -46,6 +52,9 @@ public class TaskList {
      * @param index The index of the task to mark as undone.
      */
     public void markTaskAsUndone(int index) {
+
+        assert index >= 0 && index < tasks.size() : "Index out of range";
+
         Task task = tasks.get(index);
         task.markUndone();
         Storage.saveTasksToFile(tasks);  // Save tasks immediately after modification
@@ -58,6 +67,9 @@ public class TaskList {
      * @param index The index of the task to delete.
      */
     public void deleteTask(int index) {
+
+        assert index >= 0 && index < tasks.size() : "Index out of range";
+
         tasks.remove(index);
         Storage.saveTasksToFile(tasks);
     }
@@ -69,6 +81,9 @@ public class TaskList {
      * @return The task at the specified index.
      */
     public Task getTask(int index) {
+
+        assert index >= 0 && index < tasks.size() : "Index out of range";
+
         return tasks.get(index);
     }
 
@@ -87,6 +102,18 @@ public class TaskList {
      * @param tasks The list of tasks to add.
      */
     public void addAll(ArrayList<Task> tasks) {
+
+        assert tasks != null : "Tasks list cannot be null";
+
         this.tasks.addAll(tasks);
+    }
+
+    /**
+     * Retrieves the size of the task list.
+     *
+     * @return The number of tasks in the list.
+     */
+    public int getSize() {
+        return tasks.size();
     }
 }

@@ -3,8 +3,8 @@ package Clarawr;
 import java.util.ArrayList;
 
 /**
- * Provides methods for displaying messages to the user, including
- * welcome, goodbye, task list, and error messages.
+ * Provides a method for displaying messages to the user, including
+ * task list.
  */
 public class Ui {
 
@@ -17,6 +17,8 @@ public class Ui {
      * or a message indicating that no tasks are available.
      */
     public String showListOfTasks(ArrayList<Task> tasks) {
+
+        assert tasks != null : "Task list cannot be null";
 
         if (tasks.isEmpty()) {
             return "No tasks in your list.";

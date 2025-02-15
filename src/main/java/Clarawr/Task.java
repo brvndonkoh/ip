@@ -17,6 +17,11 @@ abstract class Task {
      * @param type The type of the task (e.g., Todo, Deadline, Event).
      */
     public Task(String description, TaskType type) {
+
+        assert description != null && !description.trim().isEmpty() : "Description cannot be null or empty";
+
+        assert type != null : "Task type cannot be null";
+
         this.description = description;
         this.isDone = false;
         this.type = type;

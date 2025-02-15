@@ -9,8 +9,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
-
     /**
      * Parses a task string into a Task object.
      * Supports different task types: Todo, Deadline, and Event.
@@ -58,9 +56,6 @@ public class Parser {
      * @return An array of strings where the first element is the command and the second is the argument.
      */
     public static String[] parseCommand(String input) {
-
-        assert input != null && !input.isEmpty() : "Input command cannot be null or empty";
-
         return input.split(" ", 2);
     }
 
@@ -72,9 +67,6 @@ public class Parser {
      * @return The corresponding LocalDateTime object.
      */
     public static LocalDateTime parseDeadlineTime(String dateTimeString) {
-
-        assert dateTimeString != null && !dateTimeString.isEmpty() : "Deadline string cannot be null or empty";
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         return LocalDateTime.parse(dateTimeString, formatter);
     }

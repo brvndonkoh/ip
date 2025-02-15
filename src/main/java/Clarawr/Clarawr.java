@@ -117,8 +117,29 @@ public class Clarawr {
 			throw new ClarawrException("Please add a description, I don't know what you are talking about :(");
 		}
 		Task task = new Todo(description, false);
+
+		if (isDuplicateTask(task)) {
+			return "RAWR! You already have the task in your list dummy";
+		}
+
 		taskList.addTask(task);
 		return "Got it, I've added this task: " + task;
+	}
+
+	/**
+	 * Checks whether the given task is a duplicate in the task list.
+	 * A task is considered a duplicate if it already exists in the list of tasks, based on equality.
+	 *
+	 * @param task The task to be checked for duplication.
+	 * @return true if the task is a duplicate (exists in the task list), false otherwise.
+	 */
+	private static boolean isDuplicateTask(Task task) {
+		for (Task existingTask : taskList.getAllTasks()) {
+			if (existingTask.equals(task)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -139,8 +160,13 @@ public class Clarawr {
 			throw new ClarawrException("Tell me the description and deadline please.");
 		}
 
-		LocalDateTime deadline = parser.parseDeadlineTime(parts[1]);
+		LocalDateTime deadline = Parser.parseDeadlineTime(parts[1]);
 		Task task = new Deadline(parts[0], deadline, false);
+
+		if (isDuplicateTask(task)) {
+			return "RAWR! How many times do you want to add it? It is already in the list.";
+		}
+
 		taskList.addTask(task);
 		return "Got it, I've added this task: " + task;
 	}
@@ -179,6 +205,11 @@ public class Clarawr {
 		assert from.isBefore(to) : "The start time must be before the end time.";
 
 		Task task = new Event(parts[0], from, to, false);
+
+		if (isDuplicateTask(task)) {
+			return "No! Not going to add a duplicate man.";
+		}
+
 		taskList.addTask(task);
 		return "Got it, I've added this task: " + task;
 	}

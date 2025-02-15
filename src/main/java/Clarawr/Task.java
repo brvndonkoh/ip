@@ -1,5 +1,7 @@
 package Clarawr;
 
+import java.util.Objects;
+
 /**
  * Represents a generic task with a description, completion status, and type.
  * Subclasses must specify the type of task (e.g., Todo, Deadline, Event).
@@ -89,7 +91,33 @@ abstract class Task {
         return isDone;
     }
 
-    public TaskType getTaskType() {
-        return this.type;
+    /**
+     * Compares this task with another object for equality.
+     * Two tasks are considered equal if they have the same description.
+     *
+     * @param obj The object to compare with.
+     * @return True if the tasks are equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Task other = (Task) obj;
+        return description.equals(other.description);
     }
+
+    /**
+     * Returns a hash code for this task, based on the description.
+     *
+     * @return The hash code for the task.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
+    }
+
 }

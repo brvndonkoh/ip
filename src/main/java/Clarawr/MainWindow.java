@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
 	private Clarawr clarawr;
 
-	private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userIcon.png"));
-	private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cuteLion.png"));
+	private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/userIcon.png"));
+	private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cuteLion.png"));
 
 	/**
 	 * Initializes the MainWindow.

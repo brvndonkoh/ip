@@ -15,7 +15,7 @@ public class Launcher {
 	 */
 	public static void main(String[] args) {
 		assert args != null : "Command-line arguments should not be null";
-		assert args.length >= 0 : "Command-line arguments should be provided if required";
+		assert args.length == 0 : "Command-line arguments should be provided if required";
 
 		Application.launch(Main.class, args);
 	}

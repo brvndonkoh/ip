@@ -71,11 +71,12 @@ public class DialogBox extends HBox {
 	}
 
 	/**
-	 * Creates a dialog box for Clarawr
+	 * Creates a dialog box for Clarawr with the specified text and image.
+	 * The dialog box is flipped to distinguish it from the user's dialog.
 	 *
-	 * @param text
-	 * @param img
-	 * @return
+	 * @param text The text to be displayed in the dialog box.
+	 * @param img The image representing Clarawr.
+	 * @return A {@code DialogBox} instance with the given text and image, flipped for Clarawr.
 	 */
 	public static DialogBox getClarawrDialog(String text, Image img) {
 		var db = new DialogBox(text, img);

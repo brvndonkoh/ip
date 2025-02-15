@@ -8,8 +8,10 @@ import java.time.format.DateTimeFormatter;
  * Inherits from the Task class and provides additional functionality for event-specific properties.
  */
 public class Event extends Task {
+
     protected LocalDateTime from;
     protected LocalDateTime to;
+
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
 
     /**

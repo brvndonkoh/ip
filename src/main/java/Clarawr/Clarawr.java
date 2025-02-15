@@ -6,10 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import java.util.List;
-
-import java.util.Scanner;
-
 enum TaskType {
     TODO, DEADLINE, EVENT
 }
@@ -93,15 +89,15 @@ public class Clarawr {
 	private static String findTasksByKeyword(String keyword) {
 		StringBuilder result = new StringBuilder("Here are the matching tasks:\n");
 
-		boolean found = false;
+		boolean isFound = false;
 		for (Task task : taskList.getAllTasks()) {
 			if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
 				result.append(task).append("\n");
-				found = true;
+				isFound = true;
 			}
 		}
 
-		if (!found) {
+		if (!isFound) {
 			result.append("No matching tasks found.");
 		}
 
@@ -146,7 +142,8 @@ public class Clarawr {
 	/**
 	 * Adds a new Event task to the task list.
 	 *
-	 * @param details The description and timing of the Event task in the format "description /from start_time /to end_time".
+	 * @param details The description and timing of the Event task in the format
+	 *                   "description /from start_time /to end_time".
 	 * @return A message confirming that the Event task has been added.
 	 * @throws ClarawrException If the description or timing information is missing or malformed.
 	 */
@@ -221,24 +218,24 @@ public class Clarawr {
 		LocalDate filterDate = LocalDate.parse(dateStr);
 		StringBuilder result = new StringBuilder("Tasks on " + filterDate + ":\n");
 
-		boolean found = false;
+		boolean isFound = false;
 		for (Task task : taskList.getAllTasks()) {
 			if (task instanceof Deadline) {
 				Deadline deadline = (Deadline) task;
 				if (deadline.getDeadline().toLocalDate().equals(filterDate)) {
 					result.append(task).append("\n");
-					found = true;
+					isFound = true;
 				}
 			} else if (task instanceof Event) {
 				Event event = (Event) task;
 				if (event.getFrom().toLocalDate().equals(filterDate)) {
 					result.append(task).append("\n");
-					found = true;
+					isFound = true;
 				}
 			}
 		}
 
-		if (!found) {
+		if (!isFound) {
 			result.append("No tasks for this date.");
 		}
 

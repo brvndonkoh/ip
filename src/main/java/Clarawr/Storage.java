@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     private static final String FILE_PATH = "C:\\Users\\user\\CS2103_IP\\ip\\src\\data\\clarawr.txt";
-    ;
+    private static ArrayList<Task> tasks;
 
     /**
      * Saves a list of tasks to a file.
@@ -19,6 +19,7 @@ public class Storage {
      * @param tasks The list of tasks to save to the file.
      */
     public static void saveTasksToFile(ArrayList<Task> tasks) {
+        Storage.tasks = tasks;
         try {
             File file = new File(FILE_PATH);
             file.getParentFile().mkdirs();
@@ -44,6 +45,7 @@ public class Storage {
      */
     public ArrayList<Task> loadTasksFromFile() {
         ArrayList<Task> tasks = new ArrayList<>();
+
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {

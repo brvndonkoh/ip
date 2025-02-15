@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * Controller for the main GUI.
+ * Handles user input and display dialog boxes for the user and Clarawr.
  */
 public class MainWindow extends AnchorPane {
 	@FXML

@@ -9,19 +9,12 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * Displays a welcome message to the user.
-     */
-    public void showWelcomeMessage() {
-        System.out.println("Hello! I'm Clarawr.Clarawr\nWhat can I do for you?");
-    }
-
-    /**
      * Displays the list of tasks to the user.
      * If the task list is empty, a message indicating so is displayed.
      *
      * @param tasks The list of tasks to display.
      * @return A formatted string representation of the tasks in the list,
-     *         or a message indicating that no tasks are available.
+     * or a message indicating that no tasks are available.
      */
     public String showListOfTasks(ArrayList<Task> tasks) {
 
@@ -36,13 +29,5 @@ public class Ui {
 
         return response.toString().trim();
     }
-
-    /**
-     * Displays an error message to the user.
-     *
-     * @param errorMessage The error message to display.
-     */
-    public void showErrorMessage(String errorMessage) {
-        System.out.println(errorMessage);
-    }
 }
+

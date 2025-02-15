@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     private final LocalDateTime deadline;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
 
     /**
      * Constructs a Deadline task with the given description, deadline time, and completion status.

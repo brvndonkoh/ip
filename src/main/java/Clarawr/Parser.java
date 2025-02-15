@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
+
     /**
      * Parses a task string into a Task object.
      * Supports different task types: Todo, Deadline, and Event.
@@ -18,24 +20,18 @@ public class Parser {
      * @throws Exception If the task data is in an invalid format.
      */
     public static Task parseTask(String taskData) throws Exception {
-        //boolean isDone = false;
-        /*if (taskData.charAt(4) == 'X') {
-            isDone = true;
-            taskData = taskData.substring(0, 3) + taskData.substring(7); // Remove the [X] from the string
-        }*/
+
         boolean isDone = taskData.charAt(4) == 'X';
 
         if (taskData.startsWith("[T]")) {
             return new Todo(taskData.substring(6), isDone);
         } else if (taskData.startsWith("[D]")) {
             String[] parts = taskData.substring(6).split(" /by ");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
             LocalDateTime deadlineDateTime = LocalDateTime.parse(parts[1].trim(), formatter);
             return new Deadline(parts[0], deadlineDateTime, isDone);
         } else if (taskData.startsWith("[E]")) {
             String[] parts = taskData.substring(6).split(" /from ");
             String[] times = parts[1].split(" /to ");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm");
             LocalDateTime from = LocalDateTime.parse(times[0].trim(), formatter);
             LocalDateTime to = LocalDateTime.parse(times[1].trim(), formatter);
             return new Event(parts[0], from, to, isDone);
@@ -63,7 +59,6 @@ public class Parser {
      * @return The corresponding LocalDateTime object.
      */
     public static LocalDateTime parseDeadlineTime(String dateTimeString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         return LocalDateTime.parse(dateTimeString, formatter);
     }
 }

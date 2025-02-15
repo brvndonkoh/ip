@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-	private Clarawr clarawr = new Clarawr();
+	private final Clarawr clarawr = new Clarawr();
 
 	/**
 	 * Starts the JavaFX application by setting up the primary stage.
@@ -34,7 +34,6 @@ public class Main extends Application {
 
 			stage.setScene(scene);
 			fxmlLoader.<MainWindow>getController().setClarawr(clarawr);
-
 
 			stage.show();
 		} catch (IOException e) {

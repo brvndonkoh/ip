@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
 	private Clarawr clarawr;
 
-	private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/userIcon.png"));
-	private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cuteLion.png"));
+	private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/tarzanBoy.png"));
+	private final Image clarawrImage = new Image(this.getClass().getResourceAsStream("/images/simbaLion.jpg"));
 
 	/**
 	 * Initializes the MainWindow.
@@ -71,7 +71,7 @@ public class MainWindow extends AnchorPane {
 
 		dialogContainer.getChildren().addAll(
 				DialogBox.getUserDialog(input, userImage),
-				DialogBox.getClarawrDialog(response, dukeImage)
+				DialogBox.getClarawrDialog(response, clarawrImage)
 		);
 		userInput.clear();
 	}

@@ -182,11 +182,10 @@ Tasks on 2025-02-02:
  
 # Troubleshooting & FAQ
 ### 🤔 Why is my deadline not showing?
->Make sure you used the correct format: ````YYYY-MM-DD HHmm.````
-
+Make sure you used the correct format: ````YYYY-MM-DD HHmm.````
 
 ### 🧐 Can I edit a task instead of deleting it?
-> Not yet! You'll need to delete it and re-add a new one.
+Not yet! You'll need to delete it and re-add a new one.
 
 
 ## ***You're now a Clarawr pro! 🎉 Go forth and conquer your tasks… or I might just chomp them for you! 🦁***

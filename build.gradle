@@ -42,10 +42,11 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Clarawr"
     archiveClassifier = null
 }
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

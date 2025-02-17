@@ -78,7 +78,7 @@ public class Clarawr {
 			Platform.exit();
 
 		default:
-			return "Sorry, I do not understand your instruction *whimpers*";
+			return "Sorry, I do not understand your instruction *whimpers* ... typo?";
 		}
 	}
 
@@ -231,7 +231,7 @@ public class Clarawr {
 		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
 
 		taskList.markTaskAsDone(index);
-		return "Wow someone's productive. I've marked this task as done.";
+		return "Wow someone's productive. I've marked this task as done: " + taskList.getTask(index);
 	}
 
 	/**
@@ -249,7 +249,7 @@ public class Clarawr {
 
 		taskList.markTaskAsUndone(index);
 		return "Why did you even mark it as done in the first place?" +
-				" I've marked this task as not done yet.";
+				" I've marked this task as not done yet: " + taskList.getTask(index);
 	}
 
 	/**

@@ -42,6 +42,9 @@ public class Clarawr {
 		String command = commandParts[0].toLowerCase();
 
 		switch (command) {
+		case "hi":
+			return "Hello there! I can't find my mommy...";
+
 		case "list":
 			return ui.showListOfTasks(taskList.getAllTasks());
 
@@ -75,7 +78,7 @@ public class Clarawr {
 			Platform.exit();
 
 		default:
-			return "Sorry, I do not understand your instruction :(";
+			return "Sorry, I do not understand your instruction *whimpers*";
 		}
 	}
 
@@ -98,7 +101,7 @@ public class Clarawr {
 		}
 
 		if (!isFound) {
-			result.append("No matching tasks found.");
+			result.append("RAWR YOU WASTED MY TIME NO TASKS FOUND");
 		}
 
 		return result.toString();
@@ -114,7 +117,7 @@ public class Clarawr {
 	private static String addTodoTask(String description) throws ClarawrException {
 		assert description != null : "Description cannot be null";
 		if (description.isEmpty()) {
-			throw new ClarawrException("Please add a description, I don't know what you are talking about :(");
+			throw new ClarawrException("Please add a description *sniffs* I don't know what you are talking about...");
 		}
 		Task task = new Todo(description, false);
 
@@ -123,7 +126,7 @@ public class Clarawr {
 		}
 
 		taskList.addTask(task);
-		return "Got it, I've added this task: " + task;
+		return "Better feed me as I've added this task: " + task;
 	}
 
 	/**
@@ -168,7 +171,7 @@ public class Clarawr {
 		}
 
 		taskList.addTask(task);
-		return "Got it, I've added this task: " + task;
+		return "HEHE, I've added this task: " + task;
 	}
 
 	/**
@@ -211,7 +214,7 @@ public class Clarawr {
 		}
 
 		taskList.addTask(task);
-		return "Got it, I've added this task: " + task;
+		return "RAWR! I've added this task: " + task;
 	}
 
 	/**
@@ -228,7 +231,7 @@ public class Clarawr {
 		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
 
 		taskList.markTaskAsDone(index);
-		return "Nice! I've marked this task as done.";
+		return "Wow someone's productive. I've marked this task as done.";
 	}
 
 	/**
@@ -245,7 +248,8 @@ public class Clarawr {
 		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
 
 		taskList.markTaskAsUndone(index);
-		return "OK, I've marked this task as not done yet.";
+		return "Why did you even mark it as done in the first place?" +
+				" I've marked this task as not done yet.";
 	}
 
 	/**

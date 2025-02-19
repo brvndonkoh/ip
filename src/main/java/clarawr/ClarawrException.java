@@ -1,4 +1,4 @@
-package Clarawr;
+package clarawr;
 
 /**
  * Represents a custom exception for the Clarawr application.

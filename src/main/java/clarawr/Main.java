@@ -1,4 +1,4 @@
-package Clarawr;
+package clarawr;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 
-		stage.setTitle("Clarawr");
+		stage.setTitle("clarawr");
 
 		Image image = new Image("/images/cuteLion.png");
 		stage.getIcons().add(image);

@@ -1,4 +1,4 @@
-package Clarawr;
+package clarawr;
 
 /**
  * Represents a task of type TODO.

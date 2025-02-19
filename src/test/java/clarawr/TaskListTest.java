@@ -1,4 +1,4 @@
-package Clarawr;
+package clarawr;
 
 import org.junit.jupiter.api.Test;
 

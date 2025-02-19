@@ -1,17 +1,17 @@
-# Clarawr User Guide
+# clarawr User Guide
 # Introduction
-> RAWR! Welcome to Clarawr! This guide will walk you through key features and functionality of the Clarawr app,
+> RAWR! Welcome to clarawr! This guide will walk you through key features and functionality of the clarawr app,
 helping you get started and make the most of its capabilities.
 
 ## Product Screenshot
 ![Ui.png](Ui.png)
 
 # ⚡️ Quick Start Guide
-Welcome to Clarawr, your fun, interactive and playful task manager! Here's how to get started:
+Welcome to clarawr, your fun, interactive and playful task manager! Here's how to get started:
 1. Clone the repository from [https://github.com/brvndonkoh/ip]
 2. Navigate to the project directory on your CLI and run ````gradlew.bat clean shadowJar````
-3. You will find the **Clarawr** JAR file in the ````build/libs```` folder 
-4. To run the application: ````java -jar build\libs\Clarawr.jar````
+3. You will find the **clarawr** JAR file in the ````build/libs```` folder 
+4. To run the application: ````java -jar build\libs\clarawr.jar````
 
 
 # ➕ Adding Tasks
@@ -33,11 +33,11 @@ todo buy groceries
 ````
 Better feed me as I/ve added this task: [T][ ] buy groceries
 ````
-Clarawr will add the to-do task to your list, and it will be marked as not yet
+clarawr will add the to-do task to your list, and it will be marked as not yet
 completed by default.
 
 ## 🎯 Deadline Tasks
-In Clarawr, adding deadlines to your tasks is simple. To add a task with a deadline, use the 
+In clarawr, adding deadlines to your tasks is simple. To add a task with a deadline, use the 
 **deadline** command. Make sure to specify both the description of the task and the deadline time.
 
 ### Command Syntax
@@ -166,7 +166,7 @@ Tasks on 2025-02-02:
  [E][ ] team meeting from: Feb-02-2025 12:00 to: Feb-02-2025 14:00
 ````
 # Error Handling
->When you encounter an error, fret not! Clarawr will kindly tell you what went wrong, 
+>When you encounter an error, fret not! clarawr will kindly tell you what went wrong, 
 > and you can simply re-type your command with the correct input. It's all part of the process, no worries! 😊
 
 
@@ -188,4 +188,4 @@ Make sure you used the correct format: ````YYYY-MM-DD HHmm.````
 Not yet! You'll need to delete it and re-add a new one.
 
 
-## ***You're now a Clarawr pro! 🎉 Go forth and conquer your tasks… or I might just chomp them for you! 🦁***
+## ***You're now a clarawr pro! 🎉 Go forth and conquer your tasks… or I might just chomp them for you! 🦁***

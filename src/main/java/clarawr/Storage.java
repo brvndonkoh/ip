@@ -1,4 +1,4 @@
-package Clarawr;
+package clarawr;
 
 import java.io.*;
 

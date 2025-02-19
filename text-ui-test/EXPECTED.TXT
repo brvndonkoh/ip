@@ -1,4 +1,4 @@
-Hello! I'm Clarawr.Clarawr
+Hello! I'm clarawr.clarawr
 What can I do for you?
 Got it, I've added this task:
     [T][ ] revise CS2106

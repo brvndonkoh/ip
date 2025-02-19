@@ -42,7 +42,7 @@ public class TaskList {
 
         Task task = tasks.get(index);
         task.markAsDone();
-        Storage.saveTasksToFile(tasks);  // Save tasks immediately after modification
+        Storage.saveTasksToFile(tasks);
     }
 
     /**

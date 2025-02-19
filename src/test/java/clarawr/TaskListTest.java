@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskListTest {
     @Test
@@ -34,7 +35,7 @@ public class TaskListTest {
 
         // Verify that the Deadline task is the second one and is marked as done
         assertEquals("Submit CS2103 Assignment", allTasks.get(1).getDescription());
-        assertEquals(true, allTasks.get(1).isDone());
+        assertTrue(allTasks.get(1).isDone());
 
     }
 

@@ -38,11 +38,11 @@ test {
 }
 
 application {
-    mainClass.set("Clarawr.Launcher")
+    mainClass.set("clarawr.Launcher")
 }
 
 shadowJar {
-    archiveBaseName = "Clarawr"
+    archiveBaseName = "clarawr"
     archiveClassifier = null
 }
 

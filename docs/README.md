@@ -10,8 +10,8 @@ helping you get started and make the most of its capabilities.
 Welcome to clarawr, your fun, interactive and playful task manager! Here's how to get started:
 1. Clone the repository from [https://github.com/brvndonkoh/ip]
 2. Navigate to the project directory on your CLI and run ````gradlew.bat clean shadowJar````
-3. You will find the **clarawr** JAR file in the ````build/libs```` folder 
-4. To run the application: ````java -jar build\libs\clarawr.jar````
+3. You will find the **Clarawr** JAR file in the ````build/libs```` folder 
+4. To run the application: ````java -jar build\libs\Clarawr.jar````
 
 
 # ➕ Adding Tasks

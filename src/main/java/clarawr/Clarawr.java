@@ -39,7 +39,7 @@ public class Clarawr {
 	 */
 	private static String handleCommand(String instruction) throws ClarawrException {
 		String[] commandParts = parser.parseCommand(instruction);
-		String command = commandParts[0].toLowerCase();
+		String command = commandParts[0].toLowerCase().trim();
 
 		switch (command) {
 		case "hi":

@@ -4,6 +4,7 @@ import javafx.application.Platform;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 
 enum TaskType {
@@ -83,16 +84,21 @@ public class Clarawr {
 	}
 
 	/**
-	 * Searches for tasks in the task list that contain the specified keyword in their description.
-	 * Displays all matching tasks or a message if no matches are found.
-	 *
-	 * @param keyword The keyword to search for in task descriptions. Case-insensitive.
-	 * @return A string message listing matching tasks or indicating no matches.
-	 */
-	private static String findTasksByKeyword(String keyword) {
-		StringBuilder result = new StringBuilder("Here are the matching tasks:\n");
+		* Searches for tasks in the task list that contain the specified keyword in their description.
+		* Displays all matching tasks or a message if no matches are found.
+		*
+		* @param keyword The keyword to search for in task descriptions. Case-insensitive.
+		* @return A string message listing matching tasks or indicating no matches.
+		* @throws ClarawrException If the keyword is null or empty.
+		*/
+	private static String findTasksByKeyword(String keyword) throws ClarawrException {
+		if (keyword == null || keyword.trim().isEmpty()) {
+			throw new ClarawrException("Oops! The keyword cannot be empty. Please enter a valid search term.");
+		}
 
+		StringBuilder result = new StringBuilder("Here are the matching tasks:\n");
 		boolean isFound = false;
+
 		for (Task task : taskList.getAllTasks()) {
 			if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
 				result.append(task).append("\n");
@@ -273,22 +279,31 @@ public class Clarawr {
 	}
 
 	/**
-	 * Deletes a task by its index.
-	 *
-	 * @param indexStr The index of the task to delete (1-based index).
-	 * @return A message confirming that the task has been deleted.
-	 * @throws ClarawrException If the index is invalid or out of range.
-	 */
+		* Deletes a task by its index.
+		*
+		* @param indexStr The index of the task to delete (1-based index).
+		* @return A message confirming that the task has been deleted.
+		* @throws ClarawrException If the index is invalid, out of range, or not a number.
+		*/
 	private static String deleteTask(String indexStr) throws ClarawrException {
 		assert indexStr != null : "Index string cannot be null";
 
-		int index = Integer.parseInt(indexStr) - 1;
+		try {
+			int index = Integer.parseInt(indexStr) - 1; // Convert to zero-based index
 
-		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
+			if (index < 0 || index >= taskList.getSize()) {
+				throw new ClarawrException("Oops! The task number you provided is out of bounds dummy check the list lol.");
+			}
 
-		Task taskToDelete = taskList.getTask(index);
-		taskList.deleteTask(index);
-		return "*BURP* I've eaten this task hehe: " + taskToDelete;
+			Task taskToDelete = taskList.getTask(index);
+			taskList.deleteTask(index);
+			return "*BURP* I've eaten this task hehe: " + taskToDelete;
+
+		} catch (NumberFormatException e) {
+			throw new ClarawrException("Oops! That doesn't seem like a valid task number. Please enter a valid integer.");
+		} catch (IndexOutOfBoundsException e) {
+			throw new ClarawrException("Oops! The task number you provided is out of bounds... hais.. ");
+		}
 	}
 
 	/**
@@ -301,10 +316,21 @@ public class Clarawr {
 	private static String listTasksByDate(String dateStr) throws ClarawrException {
 		assert dateStr != null : "Date string cannot be null";
 
-		LocalDate filterDate = LocalDate.parse(dateStr);
-		StringBuilder result = new StringBuilder("Tasks on " + filterDate + ":\n");
+		// Validate format YYYY-MM-DD using regex
+		if (!dateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+			throw new ClarawrException("BRUH invalid date format. Please use YYYY-MM-DD.");
+		}
 
+		LocalDate filterDate;
+		try {
+			filterDate = LocalDate.parse(dateStr);
+		} catch (DateTimeParseException e) {
+			throw new ClarawrException("Invalid date input. You dumdum please ensure the date exists (e.g., no 2025-02-30).");
+		}
+
+		StringBuilder result = new StringBuilder("Tasks on " + filterDate + ":\n");
 		boolean isFound = false;
+
 		for (Task task : taskList.getAllTasks()) {
 			if (task instanceof Deadline) {
 				Deadline deadline = (Deadline) task;
@@ -327,7 +353,6 @@ public class Clarawr {
 
 		return result.toString();
 	}
-
 	/**
 	 * Returns the response for the user input command.
 	 *

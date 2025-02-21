@@ -1,5 +1,3 @@
-[D][X]cs2103 iP /by Feb-21-2025 23:59
-[T][ ]gym
-[T][X]fly
-[D][ ]interview /by Jan-01-2025 23:59
-[E][ ]interview /from Dec-12-2025 12:00 /to Dec-12-2025 12:30
+[T][ ]eat
+[D][X]Submit CS2103 Assignment /by Dec-12-2025 12:00
+[D][ ]eat /by Dec-12-2025 23:59

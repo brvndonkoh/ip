@@ -218,38 +218,58 @@ public class Clarawr {
 	}
 
 	/**
-	 * Marks a task as done by its index.
-	 *
-	 * @param indexStr The index of the task to mark as done (1-based index).
-	 * @return A message confirming that the task has been marked as done.
-	 * @throws ClarawrException If the index is invalid or out of range.
-	 */
+		* Marks a task as done based on the provided index.
+		*
+		* @param indexStr The index of the task to be marked as done (1-based index).
+		* @return A confirmation message indicating the task has been marked as done.
+		* @throws ClarawrException If the input is not a valid integer or if the index is out of range.
+		*/
 	private static String markTaskDone(String indexStr) throws ClarawrException {
 		assert indexStr != null : "Index string cannot be null";
 
-		int index = Integer.parseInt(indexStr) - 1;
-		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
+		try {
+			int index = Integer.parseInt(indexStr) - 1; // Convert string to zero-based index
 
-		taskList.markTaskAsDone(index);
-		return "Wow someone's productive. I've marked this task as done: " + taskList.getTask(index);
+			if (index < 0 || index >= taskList.getSize()) {
+				throw new ClarawrException("Oops! The task number you provided is out of bounds dumdum.");
+			}
+
+			taskList.markTaskAsDone(index);
+			return "Wow, someone's productive! I've marked this task as done: " + taskList.getTask(index);
+
+		} catch (NumberFormatException e) {
+			throw new ClarawrException("Oopsie Daisy! That doesn't seem like a valid task number. Please enter a valid integer.");
+		} catch (IndexOutOfBoundsException e) {
+			throw new ClarawrException("Oops! The task number you provided is out of bounds.");
+		}
 	}
 
 	/**
-	 * Marks a task as undone by its index.
-	 *
-	 * @param indexStr The index of the task to mark as undone (1-based index).
-	 * @return A message confirming that the task has been marked as undone.
-	 * @throws ClarawrException If the index is invalid or out of range.
-	 */
+		* Marks a task as undone based on the provided index.
+		*
+		* @param indexStr The index of the task to be marked as undone, provided as a string.
+		* @return A confirmation message indicating the task has been marked as not done.
+		* @throws ClarawrException If the input is not a valid integer or if the index is out of bounds.
+		*/
 	private static String markTaskUndone(String indexStr) throws ClarawrException {
 		assert indexStr != null : "Index string cannot be null";
 
-		int index = Integer.parseInt(indexStr) - 1;
-		assert index >= 0 && index < taskList.getSize() : "Index is out of bounds of the task list";
+		try {
+			int index = Integer.parseInt(indexStr) - 1; // Convert string to integer
 
-		taskList.markTaskAsUndone(index);
-		return "Why did you even mark it as done in the first place?" +
-				" I've marked this task as not done yet: " + taskList.getTask(index);
+			if (index < 0 || index >= taskList.getSize()) {
+				throw new ClarawrException("Oops! The task number you provided is out of bounds dummy.");
+			}
+
+			taskList.markTaskAsUndone(index);
+			return "Why did you even mark it as done in the first place?" +
+											" I've marked this task as not done yet: " + taskList.getTask(index);
+
+		} catch (NumberFormatException e) {
+			throw new ClarawrException("Oopsie Daisy! That doesn't seem like a valid task number. Please enter a valid integer.");
+		} catch (IndexOutOfBoundsException e) {
+			throw new ClarawrException("Oops! The task number you provided is out of bounds dummy.");
+		}
 	}
 
 	/**
